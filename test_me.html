@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load plotly.js into the DOM -->
+<script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
+<script type="text/javascript" src="../util/messagingUtil.js"></script>
+</head>
+<h1>hello</h1>
+<body>
+<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+</body>
+<script>
+va.messagingUtil.setOnDataReceivedCallback(graph_update);
+    function graph_update(vaMsgObj){
+    if (vaMsgObj && vaMsgObj.data) {
+    var data = [
+  {
+    domain: { x: [0, 1], y: [0, 1] },
+    value: vaMsgObj.data[0][0],
+    title: { text: "<b>"+vaMsgObj.data[0][1]+"</b>" },
+    type: "indicator",
+    mode: "gauge+number+delta",
+    delta: { reference:vaMsgObj.data[0][2]},
+    gauge: { axis: { range: [null, vaMsgObj.data[0][3]] }}
+  }
+];
+var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+Plotly.newPlot('myDiv', data, layout);
+}
+}
+</script>
+</html>
