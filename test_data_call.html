@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <style>
+        /* Add CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #dataDisplay {
+            width: 100%;
+            max-width: 600px; /* Adjust as needed */
+            margin: auto;
+            text-align: center;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Display</h1>
+    <div id='dataDisplay'></div>
+    <div id='errorMessage' class='error-message' style='display: none;'></div>
+
+    <script>
+        // Set callback function for data reception
+        va.messagingUtil.setOnDataReceivedCallback(graph_update);
+
+        // Function to update the data display with new data
+        function graph_update(vaMsgObj) {
+            var errorMessageDiv = document.getElementById('errorMessage');
+            if (vaMsgObj && vaMsgObj.data && vaMsgObj.data.length >= 4) {
+                var data = vaMsgObj.data[0]; // Assuming the data is in the format [value, title, reference, range]
+
+                var dataDisplayDiv = document.getElementById('dataDisplay');
+                // Construct the data display HTML
+                var dataDisplayHTML = "<h2>" + data[1] + "</h2>" + 
+                                      "<p><b>Value:</b> " + data[0] + "</p>" +
+                                      "<p><b>Reference:</b> " + data[2] + "</p>" +
+                                      "<p><b>Range:</b> 0 - " + data[3] + "</p>";
+
+                // Update the data display
+                dataDisplayDiv.innerHTML = dataDisplayHTML;
+                
+                // Hide error message if it was previously displayed
+                errorMessageDiv.style.display = 'none';
+            } else {
+                // Display error message if data is not proper
+                errorMessageDiv.innerText = 'Error: Invalid data format';
+                errorMessageDiv.style.display = 'block';
+                // Clear the data display area if an error occurs
+                document.getElementById('dataDisplay').innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
