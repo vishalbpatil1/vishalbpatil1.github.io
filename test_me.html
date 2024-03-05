@@ -1,70 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plotly Gauge Chart</title>
-    <!-- Load Plotly.js -->
-    <script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
-    <!-- Include custom JavaScript file -->
-    <script type="text/javascript" src="util/messagingUtil.js"></script>
-    <style>
-        /* Add CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        #myDiv {
-            width: 100%;
-            max-width: 600px; /* Adjust as needed */
-            height: 500px;
-            margin: auto;
-        }
-        .error-message {
-            color: red;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
-</head>
+<html>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <body>
-    <h1>Plotly Gauge Chart</h1>
-    <div id='myDiv'></div>
-    <div id='errorMessage' class='error-message' style='display: none;'></div>
 
-    <script>
-        // Set callback function for data reception
-        va.messagingUtil.setOnDataReceivedCallback(graph_update);
+<div id="myPlot" style="width:100%;max-width:700px"></div>
 
-        // Function to update the gauge chart with new data
-        function graph_update(vaMsgObj) {
-            var errorMessageDiv = document.getElementById('errorMessage');
-            if (vaMsgObj && vaMsgObj.data && vaMsgObj.data.length >= 4) {
-                var data = [{
-                    domain: { x: [0, 1], y: [0, 1] },
-                    value: vaMsgObj.data[0][0],
-                    title: { text: "<b>" + vaMsgObj.data[0][1] + "</b>" },
-                    type: "indicator",
-                    mode: "gauge+number+delta",
-                    delta: { reference: vaMsgObj.data[0][2] },
-                    gauge: { axis: { range: [null, vaMsgObj.data[0][3]] } }
-                }];
+<script>
+const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+const yArray = [55, 49, 44, 24, 15];
 
-                var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+const data = [{
+  x:xArray,
+  y:yArray,
+  type:"bar",
+  orientation:"v",
+  marker: {color:"rgba(0,0,255,0.6)"}
+}];
 
-                // Update the Plotly chart
-                Plotly.newPlot('myDiv', data, layout);
-                
-                // Hide error message if it was previously displayed
-                errorMessageDiv.style.display = 'none';
-            } else {
-                // Display error message if data is not proper
-                errorMessageDiv.innerText = 'Error: Invalid data format';
-                errorMessageDiv.style.display = 'block';
-            }
-        }
-    </script>
+const layout = {title:"World Wide Wine Production"};
+
+Plotly.newPlot("myPlot", data, layout);
+</script>
+
 </body>
 </html>
