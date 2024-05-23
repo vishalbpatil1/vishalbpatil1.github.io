@@ -5,89 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f0e3;
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@400;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+          body {
+            font-family: 'Lora', serif;
             margin: 0;
             padding: 0;
+            color: #333;
+            text-align: center;
+            background-image: url('Vishal & Varsha.gif'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 50px auto;
             padding: 30px;
+            max-width: 700px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #d4af37;
         }
-        h1, h2 {
-            text-align: center;
-            color: #6d5a5a;
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-family: 'Great Vibes', cursive;
+            color: #d4af37;
+        }
+        h2 {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #8b0000;
         }
         p {
-            text-align: center;
-            color: #7d7d7d;
+            font-size: 1.2em;
             line-height: 1.6;
+            margin: 20px 0;
         }
-        .invitation-details {
-            background-color: #f8e2c4;
-            padding: 20px;
-            border-radius: 10px;
+        .details {
             margin-top: 30px;
         }
-        .invitation-details h3 {
-            margin-top: 0;
-            color: #6d5a5a;
-            text-align: center;
+        .details p {
+            margin: 5px 0;
+            font-weight: bold;
         }
-        .invitation-details p {
-            margin-bottom: 10px;
-            color: #7d7d7d;
+        .details .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .map-container {
-            margin-top: 30px;
-            text-align: center;
+        .details .location i {
+            margin-right: 8px;
+            color: #d4af37;
         }
-        .invitation-gif {
-            display: block;
+        .details .location a {
+            text-decoration: none;
+            color: #8b0000;
+            font-weight: bold;
+        }
+        .details .location a:hover {
+            text-decoration: underline;
+        }
+        .decorative-line {
+            width: 50%;
+            height: 2px;
+            background: #d4af37;
             margin: 20px auto;
+        }
+        .invitation-text {
+            margin-top: 30px;
+            font-style: italic;
+        }
+        .gif-container {
+            margin-top: 30px;
+        }
+        .gif-container img {
             max-width: 100%;
             border-radius: 10px;
-        }
-        .cta-btn {
-            display: inline-block;
-            background-color: #6d5a5a;
-            color: #ffffff;
-            padding: 10px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .cta-btn:hover {
-            background-color: #534343;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Wedding Invitation</h1>
-        <p>You are cordially invited to celebrate the wedding of</p>
-        <h2>John Doe & Jane Smith</h2>
-        <div class="invitation-details">
-            <h3>Date & Time:</h3>
-            <p>Saturday, June 12th, 2024<br>11:00 AM - 3:00 PM</p>
-            <h3>Venue:</h3>
-            <p>St. Mary's Church<br>123 Main Street<br>City, State, ZIP</p>
-            <h3>RSVP:</h3>
-            <p>Please RSVP by June 1st, 2024</p>
+        <h2>John & Jane</h2>
+        <p>Together with their families,<br>
+           John Doe and Jane Smith<br>
+           request the pleasure of your company<br>
+           at their wedding celebration.</p>
+        <div class="decorative-line"></div>
+        <div class="details">
+            <p>Date: June 30, 2024</p>
+            <p>Time: 4:00 PM</p>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://www.google.com/maps/place/Beautiful+Gardens,+1234+Wedding+Lane,+Cityville" target="_blank">Beautiful Gardens, 1234 Wedding Lane, Cityville</a>
+            </div>
         </div>
-        <div class="map-container">
-            <!-- You can embed a map or an image of the location here -->
+        <div class="decorative-line"></div>
+        <p class="invitation-text">We look forward to celebrating with you!</p>
+        <div class="gif-container">
+            <img src="Vishal & Varsha.gif" alt="Celebration GIF"> <!-- Replace with your GIF URL -->
         </div>
-        <img src="https://media.giphy.com/media/l2R07Wz9TNEkJZr6E/giphy.gif" class="invitation-gif" alt="Wedding Invitation">
-        <p>If you have any questions, please feel free to contact us.</p>
-        <a href="#" class="cta-btn">RSVP Now</a>
     </div>
 </body>
 </html>
