@@ -62,9 +62,15 @@
             text-decoration: none;
             color: #8b0000;
             font-weight: bold;
+            animation: blink 1s infinite;
         }
         .details .location a:hover {
             text-decoration: underline;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
         .decorative-line {
             width: 50%;
