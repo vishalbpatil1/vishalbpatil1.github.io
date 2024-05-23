@@ -115,6 +115,24 @@
             font-size: 0.8em;
             color: #d4af37;
         }
+        .download-button {
+            margin-top: 20px;
+        }
+        .download-button a {
+            text-decoration: none;
+        }
+        .download-button button {
+            padding: 10px 20px;
+            background-color: #ff6699;
+            color: #ff3377;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .download-button button:hover {
+            background-color: #8b0000;
+        }
     </style>
 </head>
 <body>
@@ -160,6 +178,11 @@
                 <label>Seconds</label>
             </div>
         </div>
+        <div class="download-button">
+            <a href="invitation-card.png" download>
+                <button>Download Invitation</button>
+            </a>
+        </div>
     </div>
 
     <script>
@@ -167,32 +190,3 @@
         var countDownDate = new Date("June 16, 2024 12:30:00").getTime();
 
         // Update the count down every 1 second
-        var x = setInterval(function() {
-
-          // Get today's date and time
-          var now = new Date().getTime();
-
-          // Find the distance between now and the count down date
-          var distance = countDownDate - now;
-
-          // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          // Output the result in an element with id="countdown"
-          document.getElementById("days").innerText = days;
-          document.getElementById("hours").innerText = hours;
-          document.getElementById("minutes").innerText = minutes;
-          document.getElementById("seconds").innerText = seconds;
-
-          // If the count down is finished, write some text
-          if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "The wedding has started!";
-          }
-        }, 1000);
-    </script>
-</body>
-</html>
