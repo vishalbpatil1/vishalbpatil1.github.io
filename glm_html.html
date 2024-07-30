@@ -6,24 +6,38 @@
     <title>GLM Equations</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #f5f5f5;
+            margin: 0;
         }
         .equation-container {
             background-color: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
+            width: 90%;
+            max-width: 800px;
         }
         .equation {
-            margin: 10px 0;
+            margin: 15px 0;
             font-size: 1.2em;
+            color: #333;
+            border-left: 5px solid #007bff;
+            padding-left: 15px;
+            background-color: #eaf4ff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        .equation strong {
+            color: #007bff; /* Color for the bold text */
+            font-weight: bold;
         }
         .button {
             margin-top: 10px;
@@ -42,12 +56,15 @@
         button:hover {
             background-color: #0056b3;
         }
-        #equation-display, .back-button {
+        #equation-display {
             display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
         }
         iframe {
             width: 100%;
-            height: 400px;
+            height: 100%;
             border: none;
         }
     </style>
@@ -55,13 +72,6 @@
         function displayEquation(url) {
             document.getElementById('equation-display').style.display = 'block';
             document.getElementById('iframe').src = url;
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('back-button').style.display = 'block';
-        }
-        function goBack() {
-            document.getElementById('equation-display').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('back-button').style.display = 'none';
         }
     </script>
 </head>
@@ -69,30 +79,29 @@
     <div id="main-content">
         <div class="equation-container">
             <div class="equation">
-                Drying_LOD_ = 
-                0.00467262 - 0.2227818149 * "Dra_gran_Sifting_5_wei_of_over_" + 0.6328042654 * "Drying_Inle_Temp_Min" - 0.045954897 * "Knead_2_RMG_Chop_Amp_" + 0.0144885082 * "Milling_3_Mil_Time_Min" + 0.7676673863 * "Milling_4_Mil_Time_Min" - 0.601897948 * "Milling_5_Mil_Time_Min" + 0.0817476032 * "Sod_Lau_Sulp_Act_Use_(Kg)" + 0.229629855 * "wei_of_Weight_Tot_Weig_of_" + 0 * "Act_Wei_of_Gran_(Kg)"
+               <strong> Drying_LOD_ </strong> = 
+                <strong>0.00467262</strong> - <strong>0.2227818149</strong> * "Dra_gran_Sifting_5_wei_of_over_" + <strong>0.6328042654</strong> * "Drying_Inle_Temp_Min" - <strong>0.045954897</strong> * "Knead_2_RMG_Chop_Amp_" + <strong>0.0144885082</strong> * "Milling_3_Mil_Time_Min" + <strong>0.7676673863</strong> * "Milling_4_Mil_Time_Min" - <strong>0.601897948</strong> * "Milling_5_Mil_Time_Min" + <strong>0.0817476032</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" + <strong>0.229629855</strong> * "wei_of_Weight_Tot_Weig_of_" + <strong>0</strong> * "Act_Wei_of_Gran_(Kg)"
                 <div class="button"><button onclick="displayEquation('EQ1 Rsult.html')">View Equation 1</button></div>
             </div>
             <div class="equation">
-                Yie_of_Gran_(%) = 
-                0.0522086885 * "Col_sil_diox_Cal_(Kg_" + 0 * "Col_sil_diox_Act_Use_(Kg)" + 0.0135618448 * "Dra_gran_Sifting_1_wei_of_over_" + 0.0158621381 * "Dra_gran_Sifting_1_wei_of_Unde_" + 0.0867802621 * "Dra_gran_Sifting_3_wei_of_over_" - 0.0939612414 * "Dra_gran_Sifting_4_wei_of_Unde_" - 0.0689588023 * "Dra_gran_Sifting_5_wei_of_over_" - 0.0346081246 * "Dra_gran_Sifting_5_wei_of_Unde_" + 0.0018974072 * "Drying_Air_velo_Min" + 0.0115704609 * "Milling_3_Mil_Time_Min" - 0.0152383962 * "Sod_Lau_Sulp_Act_Use_(Kg)" + 0.9995323349 * "wei_of_Weight_Tot_Weig_of_"
-                <div class="button"><button onclick="displayEquation('equation2.html')">View Equation 2</button></div>
+                <strong>Yie_of_Gran_(%) </strong> = 
+                <strong>0.0522086885</strong> * "Col_sil_diox_Cal_(Kg_" + <strong>0</strong> * "Col_sil_diox_Act_Use_(Kg)" + <strong>0.0135618448</strong> * "Dra_gran_Sifting_1_wei_of_over_" + <strong>0.0158621381</strong> * "Dra_gran_Sifting_1_wei_of_Unde_" + <strong>0.0867802621</strong> * "Dra_gran_Sifting_3_wei_of_over_" - <strong>0.0939612414</strong> * "Dra_gran_Sifting_4_wei_of_Unde_" - <strong>0.0689588023</strong> * "Dra_gran_Sifting_5_wei_of_over_" - <strong>0.0346081246</strong> * "Dra_gran_Sifting_5_wei_of_Unde_" + <strong>0.0018974072</strong> * "Drying_Air_velo_Min" + <strong>0.0115704609</strong> * "Milling_3_Mil_Time_Min" - <strong>0.0152383962</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" + <strong>0.9995323349</strong> * "wei_of_Weight_Tot_Weig_of_"
+                <div class="button"><button onclick="displayEquation('EQ2 Rsult.html')">View Equation 2</button></div>
             </div>
             <div class="equation">
-                Batch_Yield%Yiel_Afte_Lu_ = 
-                1.153326974 * "Act_Wei_of_Gran_(Kg)_" - 0.391504709 * "Dra_gran_Milling_3_Mut_Spee_(RPM" + 0.152997045 * "Dra_gran_Milling_5_Mut_Spee_(RPM" + 0.316827537 * "Dra_gran_Sifting_1_wei_of_over_" + 0.703781451 * "Dra_gran_Sifting_1_wei_of_Unde_" + 0.2770345 * "Dra_gran_Sifting_2_wei_of_Unde_" - 0.150726787 * "Dra_gran_Sifting_3_wei_of_over_" + 0.47729931 * "Dra_gran_Sifting_5_wei_of_Unde_" + 0.253473797 * "Drying_Exha_Temp_Min" - 0.316282098 * "Sod_Lau_Sulp_Act_Use_(Kg)" - 0.599262123 * "Total_Drying_Time_Min" + 0 * "wei_of_Weight_Tot_Weig_of_"
-                <div class="button"><button onclick="displayEquation('equation3.html')">View Equation 3</button></div>
+                <strong>Batch_Yield%Yiel_Afte_Lu_ </strong> = 
+                <strong>1.153326974</strong> * "Act_Wei_of_Gran_(Kg)_" - <strong>0.391504709</strong> * "Dra_gran_Milling_3_Mut_Spee_(RPM" + <strong>0.152997045</strong> * "Dra_gran_Milling_5_Mut_Spee_(RPM" + <strong>0.316827537</strong> * "Dra_gran_Sifting_1_wei_of_over_" + <strong>0.703781451</strong> * "Dra_gran_Sifting_1_wei_of_Unde_" + <strong>0.2770345</strong> * "Dra_gran_Sifting_2_wei_of_Unde_" - <strong>0.150726787</strong> * "Dra_gran_Sifting_3_wei_of_over_" + <strong>0.47729931</strong> * "Dra_gran_Sifting_5_wei_of_Unde_" + <strong>0.253473797</strong> * "Drying_Exha_Temp_Min" - <strong>0.316282098</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" - <strong>0.599262123</strong> * "Total_Drying_Time_Min" + <strong>0</strong> * "wei_of_Weight_Tot_Weig_of_"
+                <div class="button"><button onclick="displayEquation('EQ3 Rsult.html')">View Equation 3</button></div>
             </div>
             <div class="equation">
-                Inp_fill_Weigh_Max = 
-                -0.0140262233 - 0.0254629865 * "Inp_Avg_Weigh_Mty_Min" - 0.2218389769 * "Inp_DisIntg_T_Min_sec" + 0.6061759802 * "Inp_Weigh_Caps_Max" - 0.2881680336 * "Inp_Weigh_Mty_Caps_Min"
-                <div class="button"><button onclick="displayEquation('equation4.html')">View Equation 4</button></div>
+               <strong> Inp_fill_Weigh_Max </strong> = 
+                <strong>-0.0140262233</strong> - <strong>0.0254629865</strong> * "Inp_Avg_Weigh_Mty_Min" - <strong>0.2218389769</strong> * "Inp_DisIntg_T_Min_sec" + <strong>0.6061759802</strong> * "Inp_Weigh_Caps_Max" - <strong>0.2881680336</strong> * "Inp_Weigh_Mty_Caps_Min"
+                <div class="button"><button onclick="displayEquation('EQ4 Rsult.html')">View Equation 4</button></div>
             </div>
         </div>
     </div>
-    <div id="equation-display" class="equation-container">
+    <div id="equation-display">
         <iframe id="iframe"></iframe>
-        <div class="button back-button"><button onclick="goBack()">Back</button></div>
     </div>
 </body>
 </html>
