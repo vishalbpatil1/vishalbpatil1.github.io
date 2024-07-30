@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLM Equations</title>
+    <title>GLM Equations & GLM Procedure</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,7 +11,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-color: #f5f5f5;
             margin: 0;
         }
@@ -22,7 +23,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
             width: 100%;
-            height:100%;
+            height: 100%;
         }
         .equation {
             margin: 15px 0;
@@ -79,28 +80,58 @@
     </script>
 </head>
 <body>
+    <h1>GLM Equations & GLM Procedure</h1>
     <div id="main-content">
         <div class="equation-container">
-            <title>GLM Equations & GLM Procedure</title>
             <div class="equation">
-               <strong> Drying_LOD_ </strong> = 
+                <strong>Drying_LOD_</strong> = 
                 <strong>0.00467262</strong> - <strong>0.2227818149</strong> * "Dra_gran_Sifting_5_wei_of_over_" + <strong>0.6328042654</strong> * "Drying_Inle_Temp_Min" - <strong>0.045954897</strong> * "Knead_2_RMG_Chop_Amp_" + <strong>0.0144885082</strong> * "Milling_3_Mil_Time_Min" + <strong>0.7676673863</strong> * "Milling_4_Mil_Time_Min" - <strong>0.601897948</strong> * "Milling_5_Mil_Time_Min" + <strong>0.0817476032</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" + <strong>0.229629855</strong> * "wei_of_Weight_Tot_Weig_of_" + <strong>0</strong> * "Act_Wei_of_Gran_(Kg)"
-                <div class="button"><button onclick="displayEquation('EQ1 Rsult.html')">View Equation 1</button></div>
+                <div class="button"><button onclick="displayEquation('EQ1 result.html')">View Equation 1</button></div>
             </div>
             <div class="equation">
-                <strong>Yie_of_Gran_(%) </strong> = 
+                <strong>Yie_of_Gran_(%)</strong> = 
                 <strong>0.0522086885</strong> * "Col_sil_diox_Cal_(Kg_" + <strong>0</strong> * "Col_sil_diox_Act_Use_(Kg)" + <strong>0.0135618448</strong> * "Dra_gran_Sifting_1_wei_of_over_" + <strong>0.0158621381</strong> * "Dra_gran_Sifting_1_wei_of_Unde_" + <strong>0.0867802621</strong> * "Dra_gran_Sifting_3_wei_of_over_" - <strong>0.0939612414</strong> * "Dra_gran_Sifting_4_wei_of_Unde_" - <strong>0.0689588023</strong> * "Dra_gran_Sifting_5_wei_of_over_" - <strong>0.0346081246</strong> * "Dra_gran_Sifting_5_wei_of_Unde_" + <strong>0.0018974072</strong> * "Drying_Air_velo_Min" + <strong>0.0115704609</strong> * "Milling_3_Mil_Time_Min" - <strong>0.0152383962</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" + <strong>0.9995323349</strong> * "wei_of_Weight_Tot_Weig_of_"
                 <div class="button"><button onclick="displayEquation('EQ2 result.html')">View Equation 2</button></div>
             </div>
             <div class="equation">
-                <strong>Batch_Yield%Yiel_Afte_Lu_ </strong> = 
+                <strong>Batch_Yield%Yiel_Afte_Lu_</strong> = 
                 <strong>1.153326974</strong> * "Act_Wei_of_Gran_(Kg)_" - <strong>0.391504709</strong> * "Dra_gran_Milling_3_Mut_Spee_(RPM" + <strong>0.152997045</strong> * "Dra_gran_Milling_5_Mut_Spee_(RPM" + <strong>0.316827537</strong> * "Dra_gran_Sifting_1_wei_of_over_" + <strong>0.703781451</strong> * "Dra_gran_Sifting_1_wei_of_Unde_" + <strong>0.2770345</strong> * "Dra_gran_Sifting_2_wei_of_Unde_" - <strong>0.150726787</strong> * "Dra_gran_Sifting_3_wei_of_over_" + <strong>0.47729931</strong> * "Dra_gran_Sifting_5_wei_of_Unde_" + <strong>0.253473797</strong> * "Drying_Exha_Temp_Min" - <strong>0.316282098</strong> * "Sod_Lau_Sulp_Act_Use_(Kg)" - <strong>0.599262123</strong> * "Total_Drying_Time_Min" + <strong>0</strong> * "wei_of_Weight_Tot_Weig_of_"
                 <div class="button"><button onclick="displayEquation('EQ3 result.html')">View Equation 3</button></div>
             </div>
             <div class="equation">
-               <strong> Inp_fill_Weigh_Max </strong> = 
+                <strong>Inp_fill_Weigh_Max</strong> = 
                 <strong>-0.0140262233</strong> - <strong>0.0254629865</strong> * "Inp_Avg_Weigh_Mty_Min" - <strong>0.2218389769</strong> * "Inp_DisIntg_T_Min_sec" + <strong>0.6061759802</strong> * "Inp_Weigh_Caps_Max" - <strong>0.2881680336</strong> * "Inp_Weigh_Mty_Caps_Min"
                 <div class="button"><button onclick="displayEquation('EQ4 result.html')">View Equation 4</button></div>
+            </div>
+            <div class="equation">
+                <strong>BMR_Yield</strong> = 
+                <strong>-1.433711901</strong> * "Dra_gran_Sifting_5_wei_of_over_" + <strong>3.775090905</strong> * "Drying_Exha_Temp_Min" - <strong>2.095712237</strong> * "Act_Wei_of_Gran_(Kg)_" + <strong>0</strong> * "wei_of_Weight_Tot_Weig_of_" - <strong>0.290208841</strong> * "Mag_Ste_Act_Use_(Kg)" - <strong>2.798258955</strong> * "Milling_2_Mil_Time_Min" - <strong>0.159778179</strong> * "Knead_2_RMG_Chop_Amp_" + <strong>0.302253808</strong> * "Drying_Inle_Temp_Min" - <strong>1.423766214</strong> * "Milling_4_Mil_Time_Min" + <strong>5.390144414</strong> * "Milling_5_Mil_Time_Min" - <strong>0.244740549</strong> * "Milling_3_Mil_Time_Min" - <strong>0.235938398</strong> * "Sifting_2_Sift_Time_Min"
+                <div class="button"><button onclick="displayEquation('EQ5 result.html')">View Equation 5</button></div>
+            </div>
+            <div class="equation">
+                <strong>Inp_fill_Weigh_Max</strong> = 
+                <strong>-11.92496384</strong> * "Dra_gran_Sifting_5_wei_of_over_" + <strong>27.71559108</strong> * "Drying_Exha_Temp_Min" - <strong>8.86851247</strong> * "Act_Wei_of_Gran_(Kg)_" + <strong>0</strong> * "wei_of_Weight_Tot_Weig_of_" - <strong>7.70406746</strong> * "Mag_Ste_Act_Use_(Kg)" - <strong>23.719857</strong> * "Milling_2_Mil_Time_Min" - <strong>2.05847681</strong> * "Knead_2_RMG_Chop_Amp_" + <strong>2.37078508</strong> * "Drying_Inle_Temp_Min" - <strong>8.48897537</strong> * "Milling_4_Mil_Time_Min" + <strong>49.48058221</strong> * "Milling_5_Mil_Time_Min" - <strong>2.21717832</strong> * "Milling_3_Mil_Time_Min" - <strong>8.12119695</strong> * "Sifting_2_Sift_Time_Min"
+                <div class="button"><button onclick="displayEquation('EQ6 result.html')">View Equation 6</button></div>
+			</div>
+            <div class="equation">
+                <strong>Content_uniformity_Avg%</strong> = 
+                <strong>0.000292426</strong> - <strong>0.059621139</strong> * "Dry_Mix_RMG_Impe_Amp_" - <strong>1.277211067</strong> * "Drying_Exha_Temp_Min" + <strong>0.219025956</strong> * "Drying_Inle_Temp_Min" + <strong>0.032334803</strong> * "Knead_1_RMG_Chop_Amp_" + <strong>1.622599919</strong> * "Milling_2_Mil_Time_Min" + <strong>0.90671781</strong> * "Milling_4_Mil_Time_Min" - <strong>2.235841901</strong> * "Milling_5_Mil_Time_Min" - <strong>0.113833732</strong> * "Water_Add_RMG_Impe_Amp_" - <strong>0.023637613</strong> * "Dra_gran_Milling_2_Mul_Spee_(RPM" - <strong>0.012176963</strong> * "Milling_3_Mil_Time_Min"
+                <div class="button"><button onclick="displayEquation('EQ7 result.html')">View Equation 7</button></div>           
+		   </div>
+            <div class="equation">
+                <strong>Content_uniformity_AV</strong> = 
+                <strong>-0.000014459</strong> + <strong>0.012311581</strong> * "Dry_Mix_RMG_Impe_Amp_" - <strong>2.210389766</strong> * "Drying_Exha_Temp_Min" + <strong>0.3259088</strong> * "Drying_Inle_Temp_Min" - <strong>0.542917338</strong> * "Knead_1_RMG_Chop_Amp_" + <strong>2.644017514</strong> * "Milling_2_Mil_Time_Min" + <strong>1.732173734</strong> * "Milling_4_Mil_Time_Min" - <strong>4.448170663</strong> * "Milling_5_Mil_Time_Min" - <strong>0.181876258</strong> * "Water_Add_RMG_Impe_Amp_" - <strong>0.352197869</strong> * "Dra_gran_Milling_2_Mul_Spee_(RPM" + <strong>0.04965389</strong> * "Milling_3_Mil_Time_Min"
+                <div class="button"><button onclick="displayEquation('EQ8 result.html')">View Equation 8</button></div>
+			</div>
+            <div class="equation">
+                <strong>Content_uniformity_Avg%</strong> = 
+                <strong>0.0355744491</strong> + <strong>0.0819508638</strong> * "Inp_Weigh_Caps_Min" + <strong>0.1154292354</strong> * "Inp_Reject_Caps_fill_KG" - <strong>0.6432106543</strong> * "Inp_Lock_Len_Max" + <strong>0.255577094</strong> * "Inp_DisIntg_T_Max_sec"
+                <div class="button"><button onclick="displayEquation('EQ9 result.html')">View Equation 9</button></div>
+			</div>
+            <div class="equation">
+                <strong>Content_uniformity_AV</strong> = 
+                <strong>0.0646229362</strong> - <strong>0.2273285366</strong> * "Inp_Weigh_Caps_Min" - <strong>0.1470678021</strong> * "Inp_Reject_Caps_fill_KG" - <strong>0.3517261212</strong> * "Inp_Lock_Len_Max" + <strong>0.4100099059</strong> * "Inp_DisIntg_T_Max_sec"
+				<div class="button"><button onclick="displayEquation('EQ10 result.html')">View Equation 10</button></div>
             </div>
         </div>
     </div>
