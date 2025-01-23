@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shortest Route with TomTom</title>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.22.0/maps/maps-web.min.js"></script>
+https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.22.0/maps/maps.css" />
+<style>
+#map {
+width: 100%;
+height: 100vh;
+}
+#info {
+position: absolute;
+top: 10px;
+left: 10px;
+background: white;
+padding: 10px;
+border-radius: 5px;
+z-index: 1000;
+font-family: Arial, sans-serif;
+}
+.custom-marker {
+position: absolute;
+width: 20px;
+height: 20px;
+background-color: red;
+border-radius: 50%;
+transform: translate(-50%, -50%);
+border: 2px solid white;
+z-index: 1000;
+}
+.custom-marker.destination {
+background-color: blue;
+}
+</style>
+</head>
+<body>
+<div id="info">
+<h3>Route Information</h3>
+<p id="distance">Calculating...</p>
+</div>
+<div id="map"></div>
+<script>
+// Replace with your TomTom API key
+const TOMTOM_API_KEY = "CURuY0AGljX9dnonueAHfwz4fURxQniA";
+ 
+// Define origin and destination coordinates
+const origin = { lat: 25.22926583778261, lng: 55.64911013181708 };
+const destination = { lat: 25.17302349093699, lng: 55.556853747682794 };
+ 
+// Initialize the TomTom map
+const map = tt.map({
+key: TOMTOM_API_KEY,
+container: "map",
+center: origin,
+zoom: 12,
+});
+ 
+// Create custom markers
+const createMarker = (coords, className) => {
+const marker = document.createElement("div");
+marker.className = `custom-marker ${className}`;
+document.body.appendChild(marker);
+ 
+const positionMarker = () => {
+const pixelPosition = map.project([coords.lng, coords.lat]);
+marker.style.left = `${pixelPosition.x}px`;
+marker.style.top = `${pixelPosition.y}px`;
+};
+ 
+// Position the marker initially and on map movements
+map.on("move", positionMarker);
+positionMarker();
+};
+ 
+// Add custom markers for origin and destination
+createMarker(origin, "origin");
+createMarker(destination, "destination");
+ 
+// Fetch the shortest route and display it
+fetch(
+`https://api.tomtom.com/routing/1/calculateRoute/${origin.lat},${origin.lng}:${destination.lat},${destination.lng}/json?key=${TOMTOM_API_KEY}&routeType=shortest&travelMode=car`
+)
+.then((response) => response.json())
+.then((data) => {
+const routePoints = data.routes[0].legs[0].points;
+const routeCoordinates = routePoints.map((point) => [point.longitude, point.latitude]);
+const distanceInMeters = data.routes[0].summary.lengthInMeters;
+const distanceInKilometers = (distanceInMeters / 1000).toFixed(2);
+ 
+// Display the distance
+document.getElementById("distance").innerText = `Shortest Route Distance: ${distanceInKilometers} km`;
+ 
+// Add the route to the map
+map.addLayer({
+id: "route",
+type: "line",
+source: {
+type: "geojson",
+data: {
+type: "Feature",
+geometry: {
+type: "LineString",
+coordinates: routeCoordinates,
+},
+},
+},
+layout: {},
+paint: {
+"line-color": "#0000FF",
+"line-width": 5,
+},
+});
+ 
+// Fit the map to the route bounds
+const bounds = new tt.LngLatBounds();
+routeCoordinates.forEach((coord) => bounds.extend(coord));
+map.fitBounds(bounds, { padding: 20 });
+})
+.catch((error) => console.error("Error fetching route:", error));
+</script>
+</body>
+</html>
