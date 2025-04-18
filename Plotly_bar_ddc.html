@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="../util/messagingUtil.js"></script>
+
+    <style>
+        html, body, #ddc_chart {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #ddc_chart {
+            position: relative;
+            border-style: none;
+            border-width: 0px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        "use strict";
+
+        // Set up SAS VA messaging
+        va.messagingUtil.setOnDataReceivedCallback(onDataReceived);
+
+        // Process SAS data and create Plotly horizontal bar chart
+        function onDataReceived(resultData) {
+            // Process the data from SAS VA
+            var sasData = resultData.data;
+            
+            // Map SAS column names to Plotly variables
+            // Assume we have two columns: one for categories (country names) and one for values (production amounts)
+            var categoryColumn = "category"; // e.g., country name
+            var valueColumn = "value";     // e.g., wine production value
+            
+            // Extract data from SAS result
+            var categories = [];
+            var values = [];
+            
+            for (var i = 0; i < sasData.length; i++) {
+                var row = sasData[i];
+                categories.push(row[categoryColumn]);
+                values.push(row[valueColumn]);
+            }
+            
+            // Create the trace for the horizontal bar chart
+            var data = [{
+                x: values,
+                y: categories,
+                type: "bar",
+                orientation: "h",
+                marker: {color: "rgba(255,0,0,0.6)"}
+            }];
+            
+            // Create the layout
+            var layout = {
+                title: "World Wide Wine Production",
+                margin: {
+                    l: 150, // Adjust left margin to accommodate category labels
+                    r: 30,
+                    t: 50,
+                    b: 50
+                },
+                xaxis: {
+                    title: "Production (million litres)"
+                }
+            };
+            
+            // Create the plot
+            Plotly.newPlot('ddc_chart', data, layout);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="ddc_chart"></div>
+</body>
+
+</html>
