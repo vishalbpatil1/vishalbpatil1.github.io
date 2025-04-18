@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="../util/messagingUtil.js"></script>
+
+    <style>
+        html, body, #ddc_chart {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #ddc_chart {
+            position: relative;
+            border-style: none;
+            border-width: 0px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        "use strict";
+
+        // Set up SAS VA messaging
+        va.messagingUtil.setOnDataReceivedCallback(onDataReceived);
+
+        // Initialize lookup table for organizing data by year and continent
+        var lookup = {};
+        
+        function getData(year, continent) {
+            var byYear, trace;
+            if (!(byYear = lookup[year])) {
+                byYear = lookup[year] = {};
+            }
+            
+            if (!(trace = byYear[continent])) {
+                trace = byYear[continent] = {
+                    x: [],
+                    y: [],
+                    id: [],
+                    text: [],
+                    marker: {size: []}
+                };
+            }
+            return trace;
+        }
+
+        // Process SAS data and create Plotly chart
+        function onDataReceived(resultData) {
+            // Clear any previous lookup data
+            lookup = {};
+            
+            // Process the data from SAS VA
+            var data = resultData.data;
+            
+            // Map SAS column names to Plotly variables
+            // Note: You'll need to adjust these based on your actual SAS data structure
+            var yearColumn = "year";
+            var continentColumn = "continent";
+            var countryColumn = "country";
+            var lifeExpColumn = "lifeExp";
+            var gdpPercapColumn = "gdpPercap";
+            var popColumn = "pop";
+            
+            // Go through each row, get the right trace, and append the data
+            for (var i = 0; i < data.length; i++) {
+                var datum = data[i];
+                var trace = getData(datum[yearColumn], datum[continentColumn]);
+                trace.text.push(datum[countryColumn]);
+                trace.id.push(datum[countryColumn]);
+                trace.x.push(datum[lifeExpColumn]);
+                trace.y.push(datum[gdpPercapColumn]);
+                trace.marker.size.push(datum[popColumn]);
+            }
+
+            // Get the group names
+            var years = Object.keys(lookup);
+            // In this case, every year includes every continent, so we
+            // can just infer the continents from the *first* year:
+            var firstYear = lookup[years[0]];
+            var continents = Object.keys(firstYear);
+
+            // Create the main traces, one for each continent
+            var traces = [];
+            for (var i = 0; i < continents.length; i++) {
+                var data = firstYear[continents[i]];
+                traces.push({
+                    name: continents[i],
+                    x: data.x.slice(),
+                    y: data.y.slice(),
+                    id: data.id.slice(),
+                    text: data.text.slice(),
+                    mode: 'markers',
+                    marker: {
+                        size: data.marker.size.slice(),
+                        sizemode: 'area',
+                        sizeref: 200000
+                    }
+                });
+            }
+
+            // Create a frame for each year
+            var frames = [];
+            for (var i = 0; i < years.length; i++) {
+                frames.push({
+                    name: years[i],
+                    data: continents.map(function (continent) {
+                        return getData(years[i], continent);
+                    })
+                });
+            }
+            
+            // Create slider steps
+            var sliderSteps = [];
+            for (var i = 0; i < years.length; i++) {
+                sliderSteps.push({
+                    method: 'animate',
+                    label: years[i],
+                    args: [[years[i]], {
+                        mode: 'immediate',
+                        transition: {duration: 300},
+                        frame: {duration: 300, redraw: false},
+                    }]
+                });
+            }
+            
+            var layout = {
+                xaxis: {
+                    title: 'Life Expectancy',
+                    range: [30, 85]
+                },
+                yaxis: {
+                    title: 'GDP per Capita',
+                    type: 'log'
+                },
+                hovermode: 'closest',
+                updatemenus: [{
+                    x: 0,
+                    y: 0,
+                    yanchor: 'top',
+                    xanchor: 'left',
+                    showactive: false,
+                    direction: 'left',
+                    type: 'buttons',
+                    pad: {t: 87, r: 10},
+                    buttons: [{
+                        method: 'animate',
+                        args: [null, {
+                            mode: 'immediate',
+                            fromcurrent: true,
+                            transition: {duration: 300},
+                            frame: {duration: 500, redraw: false}
+                        }],
+                        label: 'Play'
+                    }, {
+                        method: 'animate',
+                        args: [[null], {
+                            mode: 'immediate',
+                            transition: {duration: 0},
+                            frame: {duration: 0, redraw: false}
+                        }],
+                        label: 'Pause'
+                    }]
+                }],
+                sliders: [{
+                    pad: {l: 130, t: 55},
+                    currentvalue: {
+                        visible: true,
+                        prefix: 'Year:',
+                        xanchor: 'right',
+                        font: {size: 20, color: '#666'}
+                    },
+                    steps: sliderSteps
+                }]
+            };
+            
+            // Create the plot
+            Plotly.newPlot('ddc_chart', {
+                data: traces,
+                layout: layout,
+                frames: frames
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="ddc_chart"></div>
+</body>
+
+</html>
